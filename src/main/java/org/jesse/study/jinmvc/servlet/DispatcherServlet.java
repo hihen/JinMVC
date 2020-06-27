@@ -20,10 +20,13 @@ import java.net.URL;
 import java.util.*;
 
 public class DispatcherServlet extends HttpServlet {
-
+    // bean容器
     private final Map<String, Object> beanContainer = new HashMap<>();
+    // 存储到指定目录下扫描到的类
     private final List<String> classList = new ArrayList<>();
+    // 存储url和Java方法的映射
     private final Map<String, Method> urlAndMethodMap = new HashMap<>();
+    // 存储url和bean的映射
     private final Map<String, Object> urlAndBeanMap = new HashMap<>();
 
     @Override
@@ -49,7 +52,8 @@ public class DispatcherServlet extends HttpServlet {
             if (f.isDirectory()) {
                 scanPackage(fName);
             } else {
-                if (fName.contains(".class")) {  // 把class文件存储起来
+                // 把class文件存储起来
+                if (fName.contains(".class")) {
                     classList.add(fName);
                 }
             }
